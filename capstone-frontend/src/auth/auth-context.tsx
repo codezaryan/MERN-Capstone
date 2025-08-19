@@ -70,7 +70,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return false
   }
 
-  const register = async (name: string, email: string, password: string): Promise<boolean> => {
+  const register = async (name: string, email: string, _password: string): Promise<boolean> => {
     setIsLoading(true)
 
     // Mock registration - replace with real API call

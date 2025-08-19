@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useEffect } from "react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
@@ -10,12 +9,15 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 
-interface Post {
+// ✅ Define PostStatus separately so it's reused everywhere
+export type PostStatus = "published" | "draft" | "archived" | "scheduled"
+
+export interface Post {
   id: string
   title: string
   author: string
   date: string
-  status: "published" | "draft" | "archived"
+  status: PostStatus
   views: number
 }
 
@@ -23,14 +25,24 @@ interface PostModalProps {
   open: boolean
   onOpenChange: (open: boolean) => void
   post: Post | null
-  onSave: (postData: any) => void
+  onSave: (postData: {
+    title: string
+    author: string
+    status: PostStatus
+    content: string
+  }) => void
 }
 
 export function PostModal({ open, onOpenChange, post, onSave }: PostModalProps) {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    title: string
+    author: string
+    status: PostStatus
+    content: string
+  }>({
     title: "",
     author: "",
-    status: "draft" as const,
+    status: "draft",
     content: "",
   })
 
@@ -65,6 +77,7 @@ export function PostModal({ open, onOpenChange, post, onSave }: PostModalProps) 
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Title */}
           <div className="space-y-2">
             <Label htmlFor="title">Title</Label>
             <Input
@@ -76,6 +89,7 @@ export function PostModal({ open, onOpenChange, post, onSave }: PostModalProps) 
             />
           </div>
 
+          {/* Author */}
           <div className="space-y-2">
             <Label htmlFor="author">Author</Label>
             <Input
@@ -87,23 +101,26 @@ export function PostModal({ open, onOpenChange, post, onSave }: PostModalProps) 
             />
           </div>
 
+          {/* Status */}
           <div className="space-y-2">
             <Label htmlFor="status">Status</Label>
             <Select
               value={formData.status}
-              onValueChange={(value: "published" | "draft" | "archived") => setFormData({ ...formData, status: value })}
+              onValueChange={(value: PostStatus) => setFormData({ ...formData, status: value })}
             >
               <SelectTrigger>
-                <SelectValue />
+                <SelectValue placeholder="Select status" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="draft">Draft</SelectItem>
                 <SelectItem value="published">Published</SelectItem>
                 <SelectItem value="archived">Archived</SelectItem>
+                <SelectItem value="scheduled">Scheduled</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
+          {/* Content */}
           <div className="space-y-2">
             <Label htmlFor="content">Content</Label>
             <Textarea
@@ -119,6 +136,7 @@ export function PostModal({ open, onOpenChange, post, onSave }: PostModalProps) 
             </p>
           </div>
 
+          {/* Buttons */}
           <div className="flex justify-end space-x-2 pt-4">
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
               Cancel
