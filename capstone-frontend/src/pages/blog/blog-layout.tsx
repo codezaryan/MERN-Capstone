@@ -6,6 +6,7 @@ import { BlogHome } from "./blog-home"
 import { BlogPost } from "./blog-post"
 import { CreatePost } from "./create-post"
 import { UserProfile } from "./user-profile"
+import Footer from "@/components/Footer"
 
 interface BlogLayoutProps {
   onShowAuth: () => void
@@ -36,9 +37,10 @@ export function BlogLayout({ onShowAuth }: BlogLayoutProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <BlogHeader currentView={currentView} onNavigate={setCurrentView} onShowAuth={onShowAuth} />
-      <main className="container mx-auto px-4 py-8">{renderContent()}</main>
+      <main className="container mx-auto px-4 py-8 flex-1">{renderContent()}</main>
+      <Footer />
     </div>
   )
 }

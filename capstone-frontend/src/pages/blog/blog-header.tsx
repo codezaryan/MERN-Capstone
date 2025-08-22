@@ -36,17 +36,17 @@ export function BlogHeader({ currentView, onNavigate, onShowAuth }: BlogHeaderPr
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 dark">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <div className="flex items-center space-x-6">
-          <h1 className="text-2xl font-bold text-primary cursor-pointer" onClick={() => onNavigate("home")}>
+          <h1 className="text-2xl font-bold text-primary cursor-pointer border-gray-50" onClick={() => onNavigate("home")}>
             BlogSpace
           </h1>
-           <Button
+           {/* <Button
                 variant={currentView === "create" ? "default" : "ghost"}
                 size="sm"
                 onClick={() => onNavigate("create")}
                 className="md:hidden flex items-center text-white"
               >
                 <PenSquare className="h-6 w-6" />
-              </Button>
+              </Button> */}
 
           <nav className="hidden md:flex items-center space-x-4">
             <Button variant={currentView === "home" ? "default" : "ghost"} size="sm" onClick={() => onNavigate("home")}>
@@ -61,7 +61,7 @@ export function BlogHeader({ currentView, onNavigate, onShowAuth }: BlogHeaderPr
                 onClick={() => onNavigate("create")}
                 className="flex items-center"
               >
-                <PenSquare className="h-4 w-4 mr-2" />
+                <PenSquare className="h-4 w-4" />
                 Write Post
               </Button>
             )}
@@ -69,18 +69,21 @@ export function BlogHeader({ currentView, onNavigate, onShowAuth }: BlogHeaderPr
         </div>
        
         <div className="flex items-center space-x-4">
+          <div className="rounded-lg  text-black dark:text-white">
            <ThemeToggle />
+          </div>
+           
           {user ? (
             <>
               {/* Write Post button visible in header for medium screens and up */}
-              {/* <Button
+              <Button
                 variant={currentView === "create" ? "default" : "ghost"}
                 size="sm"
                 onClick={() => onNavigate("create")}
                 className="md:hidden flex items-center"
               >
                 <PenSquare className="h-4 w-4" />
-              </Button> */}
+              </Button>
               
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
