@@ -37,19 +37,19 @@ export function LoginForm({ onToggleMode, onSuccess }: LoginFormProps) {
 
     const success = await login(email, password)
 
-    if (success) {
-      toast({
-        title: "Success",
-        description: "Logged in successfully!",
-      })
-      onSuccess()
-    } else {
-      toast({
-        title: "Error",
-        description: "Invalid email or password",
-        variant: "destructive",
-      })
-    }
+    // if (success) {
+    //   toast({
+    //     title: "Success",
+    //     description: "Logged in successfully!",
+    //   })
+    //   onSuccess()
+    // } else {
+    //   toast({
+    //     title: "Error",
+    //     description: "Invalid email or password",
+    //     variant: "destructive",
+    //   })
+    // }
   }
 
   return (

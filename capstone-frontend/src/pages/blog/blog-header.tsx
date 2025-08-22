@@ -39,14 +39,14 @@ export function BlogHeader({ currentView, onNavigate, onShowAuth }: BlogHeaderPr
           <h1 className="text-2xl font-bold text-primary cursor-pointer border-gray-50" onClick={() => onNavigate("home")}>
             BlogSpace
           </h1>
-           {/* <Button
+           <Button
                 variant={currentView === "create" ? "default" : "ghost"}
                 size="sm"
                 onClick={() => onNavigate("create")}
                 className="md:hidden flex items-center text-white"
               >
                 <PenSquare className="h-6 w-6" />
-              </Button> */}
+              </Button>
 
           <nav className="hidden md:flex items-center space-x-4">
             <Button variant={currentView === "home" ? "default" : "ghost"} size="sm" onClick={() => onNavigate("home")}>
@@ -76,14 +76,14 @@ export function BlogHeader({ currentView, onNavigate, onShowAuth }: BlogHeaderPr
           {user ? (
             <>
               {/* Write Post button visible in header for medium screens and up */}
-              <Button
+              {/* <Button
                 variant={currentView === "create" ? "default" : "ghost"}
                 size="sm"
                 onClick={() => onNavigate("create")}
                 className="md:hidden flex items-center"
               >
                 <PenSquare className="h-4 w-4" />
-              </Button>
+              </Button> */}
               
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
