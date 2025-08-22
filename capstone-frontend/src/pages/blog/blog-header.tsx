@@ -67,8 +67,9 @@ export function BlogHeader({ currentView, onNavigate, onShowAuth }: BlogHeaderPr
             )}
           </nav>
         </div>
-
+       
         <div className="flex items-center space-x-4">
+           <ThemeToggle />
           {user ? (
             <>
               {/* Write Post button visible in header for medium screens and up */}
@@ -80,7 +81,7 @@ export function BlogHeader({ currentView, onNavigate, onShowAuth }: BlogHeaderPr
               >
                 <PenSquare className="h-4 w-4" />
               </Button> */}
-                <ThemeToggle />
+              
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="relative h-8 w-8 rounded-full">
