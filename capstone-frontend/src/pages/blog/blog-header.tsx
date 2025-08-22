@@ -39,14 +39,18 @@ export function BlogHeader({ currentView, onNavigate, onShowAuth }: BlogHeaderPr
           <h1 className="text-2xl font-bold text-primary cursor-pointer border-gray-50" onClick={() => onNavigate("home")}>
             BlogSpace
           </h1>
-           <Button
-                variant={currentView === "create" ? "default" : "ghost"}
-                size="sm"
-                onClick={() => onNavigate("create")}
-                className="md:hidden flex items-center text-white"
-              >
-                <PenSquare className="h-6 w-6" />
-              </Button>
+          
+          {/* Mobile Write Post button - only show if user is logged in */}
+          {user && (
+            <Button
+              variant={currentView === "create" ? "default" : "ghost"}
+              size="sm"
+              onClick={() => onNavigate("create")}
+              className="md:hidden flex items-center text-white"
+            >
+              <PenSquare className="h-6 w-6" />
+            </Button>
+          )}
 
           <nav className="hidden md:flex items-center space-x-4">
             <Button variant={currentView === "home" ? "default" : "ghost"} size="sm" onClick={() => onNavigate("home")}>
@@ -61,7 +65,7 @@ export function BlogHeader({ currentView, onNavigate, onShowAuth }: BlogHeaderPr
                 onClick={() => onNavigate("create")}
                 className="flex items-center"
               >
-                <PenSquare className="h-4 w-4" />
+                <PenSquare className="h-4 w-4 mr-2" />
                 Write Post
               </Button>
             )}
@@ -69,22 +73,12 @@ export function BlogHeader({ currentView, onNavigate, onShowAuth }: BlogHeaderPr
         </div>
        
         <div className="flex items-center space-x-4">
-          <div className="rounded-lg  text-black dark:text-white">
-           <ThemeToggle />
+          <div className="rounded-lg text-black dark:text-white">
+            <ThemeToggle />
           </div>
            
           {user ? (
             <>
-              {/* Write Post button visible in header for medium screens and up */}
-              {/* <Button
-                variant={currentView === "create" ? "default" : "ghost"}
-                size="sm"
-                onClick={() => onNavigate("create")}
-                className="md:hidden flex items-center"
-              >
-                <PenSquare className="h-4 w-4" />
-              </Button> */}
-              
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="relative h-8 w-8 rounded-full">
@@ -107,10 +101,10 @@ export function BlogHeader({ currentView, onNavigate, onShowAuth }: BlogHeaderPr
                     Profile
                   </DropdownMenuItem>
                   {/* Write Post option in dropdown for mobile view */}
-                  {/* <DropdownMenuItem onClick={() => onNavigate("create")} className="md:hidden">
+                  <DropdownMenuItem onClick={() => onNavigate("create")} className="md:hidden">
                     <PenSquare className="mr-2 h-4 w-4" />
                     Write Post
-                  </DropdownMenuItem> */}
+                  </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleLogout}>
                     <LogOut className="mr-2 h-4 w-4" />
